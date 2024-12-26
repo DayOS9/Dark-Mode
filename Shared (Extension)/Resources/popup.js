@@ -4,5 +4,6 @@ document.addEventListener("DOMContentLoaded", () => {
     var element = document.body;
     element.classList.toggle("dark-mode");
     button.classList.toggle("dark-mode");
+    browser.runtime.sendMessage({ action: "toggle" });
   });
 });
