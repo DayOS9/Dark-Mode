@@ -1,19 +1,14 @@
-browser.runtime.sendMessage({ greeting: "hello" }).then((response) => {
-  console.log("Received response: ", response);
-});
-
-browser.runtime.onMessage.addListener((request, sender, sendResponse) => {
-  console.log("Received request: ", request);
-});
-
-browser.runtime.onMessage.addListener((message) => {
-  if (message.action === "toggle") {
-    console.log("Changing background color of the main page...");
-    var element = document.body;
-    if (element.style.backgroundColor != "black") {
+async function affect() {
+  try {
+    let state = await browser.storage.local.get("Dark");
+    if (state.Dark === 1) {
+      var element = document.body;
       element.style.backgroundColor = "black";
-    } else {
-      element.style.backgroundColor = "white";
     }
+  } catch (error) {
+    console.log(error);
+    console.log("Perhaps state was not found or its first time ?");
   }
-});
+}
+
+affect();
