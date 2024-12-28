@@ -1,3 +1,12 @@
+const observer = new MutationObserver(() => {
+  affect();
+});
+
+observer.observe(document.getRootNode(), {
+  subtree: true,
+  childList: true,
+});
+
 async function affect() {
   try {
     let state = await browser.storage.local.get("Dark");
@@ -11,4 +20,4 @@ async function affect() {
   }
 }
 
-affect();
+//affect();
